@@ -12,18 +12,13 @@ public class Main {
         ServerSocket server = new ServerSocket(porta);
         System.out.println("Server avviato con successo sulla porta " + porta);
         
-        ArrayList<Integer> classifica = new ArrayList<>(); 
-        //numero random
-        Random random = new Random();
-        int numero = random.nextInt(100);
-        ServerThread.find = numero;
-        System.out.println("Numero da indovinare = " + numero);
-
+        Classifiche livelli = new Classifiche();
+        
         do {
             Socket skt = server.accept();
             System.out.println("un client si è collegato");
 
-            ServerThread cl = new ServerThread(skt, classifica);
+            ServerThread cl = new ServerThread(skt, livelli);
             cl.start();
         } while (true);
     }
